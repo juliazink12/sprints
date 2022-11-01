@@ -1,6 +1,8 @@
 package backgammon;
 import java.util.*;
 
+//update okay
+
 public class Checker {
 	
 	boolean color;
@@ -19,7 +21,7 @@ public class Checker {
 			return ("O");
 		}
 		else {
-			return ("\u001B[31m O \u001B[0m");
+			return ("\u001B[31mO\u001B[0m");
 		}
 	}
 

@@ -1,7 +1,7 @@
 package backgammon;
 import java.util.*;
 
-
+//update okay
 
 public class Point {
 	

@@ -1,6 +1,7 @@
 package backgammon;
 import java.util.*;
 
+//update okay
 
 public class Play {
 	
@@ -34,7 +35,7 @@ public class Play {
 		Checker checker12 = new Checker(true);
 		Checker checker13 = new Checker(true);
 		Checker checker14 = new Checker(true);
-		Checker checker15 = new Checker(false);
+		Checker checker15 = new Checker(true);
 		Checker checker16 = new Checker(false);
 		Checker checker17 = new Checker(false);
 		Checker checker18 = new Checker(false);
