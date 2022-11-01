@@ -24,6 +24,7 @@ public class Board {
 	public void setBoard(int[] board) {
 		// for debugging
 		this.board = board;
+	}
 	
 	public void setUp() {
 		checkerCounts = new int[24];
@@ -36,9 +37,11 @@ public class Board {
 		return checkerCounts[i];
 	}
 	
-	public Checker getChecker(int i) {
+	/*
+	 * public Checker getChecker(int i) {
 		if(i < 0 || i > 24) return checkers;
 	}
+*/
 	
 	//getbarcount??
 	

@@ -2,7 +2,7 @@ package backgammon;
 import java.util.*;
 
 public class View {
-
+/*
 	Scanner in;
 	private String name;
 	Dice dices;
@@ -11,12 +11,16 @@ public class View {
 	View(){
 	 in = new Scanner(System.in);
 	}
+	*/
+	
+	//bfdwb
 	
 	/* used in Main Class
 	System.out.println("Players please enter roll to start:");
 	String command = in.nextLine();
 	System.out.println("Player 1:"+p1+"\t"+"Player 2:"+p2);*/
 	
+	/*
 	public void welcomePlayers() {
 		System.out.println("Welcome to Backgammon");
 	}	
@@ -193,5 +197,6 @@ public class View {
 	public void displayLog() {
 		
 	}	
+	*/
 	
 }
