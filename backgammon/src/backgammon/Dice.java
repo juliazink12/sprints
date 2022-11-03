@@ -1,4 +1,4 @@
-//package backgammon;
+package backgammon;
 import java.util.*;
 
 public class Dice {
