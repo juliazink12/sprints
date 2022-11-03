@@ -8,7 +8,7 @@ Julia Zink and Panassaya Ounsawatdipong
 Checker class
 Point class
 Play class
--
+.
 Names
 Roll/quit
 Display board
