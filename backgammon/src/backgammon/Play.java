@@ -1,11 +1,10 @@
-package backgammon;
+//package backgammon;
 import java.util.*;
 
 //update okay
 
 public class Play {
-	
-	
+		
 	
 	public static int[] rollDice() {
 		Random rand = new Random();;
@@ -15,12 +14,87 @@ public class Play {
 		return result;
 	}
 	
+	ArrayList<Point> point = new ArrayList<Point>();
 	
+	public static ArrayList<Point> createPoint(){
+		var point = new ArrayList<Point>();
+		for(int i=1;i<=6;i++) {
+			point.add(new Point(i,1));
+		}
+		for(int j=7; j<=12;j++) {
+			point.add(new Point(j,2));
+		}
+		for(int k=13; k<=18;k++) {
+			point.add(new Point(k,3));
+		}
+		for(int l=19; l<=14;l++) {
+			point.add(new Point(l,4));
+		}
+		return point;
+	}
 	
+	public static Stack<Checker> createChecker(){
+		var checker =new Stack<Checker>();
+		for(int i=1; i<=15; i++) {
+			checker.add(new Checker(true));
+		}
+		return checker;
+	}
 	
+	public static ArrayList<Point> fillChecker(){
+		var point = createPoint();
+		var white = new Checker(true);
+		point.get(0).addChecker(white);
+		point.get(0).addChecker(white);
+		for(int i=1;i<=5;i++) {
+			point.get(11).addChecker(white);
+			point.get(18).addChecker(white);
+		}
+		for (int j=1;j<=3;j++) {
+			point.get(16).addChecker(white);
+		}
+		point.get(23).addChecker(white);
+		point.get(23).addChecker(white);
+		for(int k=1;k<=5;k++) {
+			point.get(5).addChecker(white);
+			point.get(12).addChecker(white);
+		}
+		for (int l=1;l<=3;l++) {
+			point.get(7).addChecker(white);
+		}
+		return point;
+	}
 	
+	public static void defaultPoints() {
+		var point = fillChecker();
+		
+		for(int i=0; i<=point.size(); i++) {
+			if (point.get(i).quarter==1) {
+				for(int j=0; j<=5; j++) {
+					System.out.print(point.get(j).pointToString());
+				}
+				System.out.print("\t");
+			}else if(point.get(i).quarter==2) {
+				for(int k=6; k<=11; k++) {
+					System.out.print(point.get(k).pointToString()+"\n");
+				}
+			}else if(point.get(i).quarter==3) {
+				for(int l=12; l<=17; l++) {
+					System.out.print(point.get(l).pointToString());
+				}
+			}else if(point.get(i).quarter==4) {
+				for(int m=18; m<=23; m++) {
+					System.out.print(point.get(m).pointToString());
+				}
+			}
+		}
+	}
+		
+		
 	public static void main(String[] args) {
 		
+		defaultPoints();
+		/*
 		Checker checker1 = new Checker(true);
 		Checker checker2 = new Checker(true);
 		Checker checker3 = new Checker(true);
@@ -109,7 +183,7 @@ public class Play {
 		point24.addChecker(checker29);
 		point24.addChecker(checker30);
 		
-		
+		*/
 		
 		
 		
@@ -149,6 +223,7 @@ public class Play {
 			}
 			
 			
+			/*
 			String temp = "";
 			
 			System.out.println(" ");
@@ -201,12 +276,10 @@ public class Play {
 			System.out.println(temp);
 			temp = "    24 \t " + point24.pointToString();
 			System.out.println(temp);
-
 			
+			*/
 			
-			
-			
-			
+		
 			
 			
 			currentPlayer = (currentPlayer == 1 ? 2 : 1);
