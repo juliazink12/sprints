@@ -5,10 +5,5 @@ Julia Zink and Panassaya Ounsawatdipong
 
 # Sprint 1
 
-Checker class
-Point class
-Play class
-.
-Names
-Roll/quit
-Display board
+Classes: Checker, Point, Play.
+Features: names, roll/quit, display board.
