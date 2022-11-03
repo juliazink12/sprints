@@ -1,9 +1,10 @@
 Repository for the Software Engineering group project (COMP41670)
 
 # Group members
-Julia Zink and Panassaya Ounsawatdipong
+Julia Zink  
+Panassaya Ounsawatdipong  
 
 # Sprint 1
 
 Classes: Checker, Point, Play.   
-Features: names, roll/quit, display board.
+Features: names, roll/quit, display board.  
