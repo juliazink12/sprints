@@ -1,6 +1,6 @@
 Repository for the Software Engineering group project (COMP41670)
 
-# Group members
+# Group 12 members
 Julia Zink  
 Panassaya Ounsawatdipong  
 
