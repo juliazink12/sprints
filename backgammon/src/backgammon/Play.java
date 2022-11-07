@@ -4,7 +4,6 @@ import java.util.*;
 //update okay
 
 public class Play {
-		
 	
 	public static int[] rollDice() {
 		Random rand = new Random();;
@@ -14,7 +13,7 @@ public class Play {
 		return result;
 	}
 	
-	ArrayList<Point> point = new ArrayList<Point>();
+	/*ArrayList<Point> point = new ArrayList<Point>();
 	
 	public static ArrayList<Point> createPoint(){
 		var point = new ArrayList<Point>();
@@ -33,8 +32,8 @@ public class Play {
 		return point;
 	}
 	
-	public static Stack<Checker> createChecker(){
-		var checker =new Stack<Checker>();
+	public static ArrayList<Checker> createChecker(){
+		var checker =new ArrayList<Checker>();
 		for(int i=1; i<=15; i++) {
 			checker.add(new Checker(true));
 		}
@@ -88,13 +87,13 @@ public class Play {
 				}
 			}
 		}
-	}
+	}*/
 		
 		
 	public static void main(String[] args) {
 		
-		defaultPoints();
-		/*
+		//defaultPoints();
+		
 		Checker checker1 = new Checker(true);
 		Checker checker2 = new Checker(true);
 		Checker checker3 = new Checker(true);
@@ -183,8 +182,8 @@ public class Play {
 		point24.addChecker(checker29);
 		point24.addChecker(checker30);
 		
-		*/
 		
+		Dice dice = new Dice();
 		
 		
 		
@@ -218,12 +217,13 @@ public class Play {
 			}
 			
 			if (newInput.equals("roll")) {
-				int[] result = rollDice();
+				int[] result = dice.rollDices();
+				//int[] result = rollDice();
 				System.out.println(result[0] + ", " + result[1]);
 			}
 			
 			
-			/*
+			
 			String temp = "";
 			
 			System.out.println(" ");
@@ -277,7 +277,7 @@ public class Play {
 			temp = "    24 \t " + point24.pointToString();
 			System.out.println(temp);
 			
-			*/
+			
 			
 		
 			

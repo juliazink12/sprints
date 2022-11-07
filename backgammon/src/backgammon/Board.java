@@ -8,8 +8,7 @@ public class Board {
 	private int bar;
 	private int[] board;
 	
-	private int[] checkerCounts;
-	//ต้องมี private Checker.Color[] checkerColors; มั้ย??
+	//private int[] checkerCounts;
 	
 	private Point points;
 	private Checker checkers;
@@ -27,22 +26,16 @@ public class Board {
 	}
 	
 	public void setUp() {
-		checkerCounts = new int[24];
-		//color class?
+		board = new int[24];
+		
 	}
 	
-	public int getCheckerCount(int i) {
+	public int getPointCount(int i) {
 		if(i < 0 || i > 24) return 0;
 		
-		return checkerCounts[i];
+		return board[i];
 	}
 	
-	/*
-	 * public Checker getChecker(int i) {
-		if(i < 0 || i > 24) return checkers;
-	}
-*/
 	
-	//getbarcount??
 	
 }

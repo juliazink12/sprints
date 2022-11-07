@@ -42,6 +42,12 @@ public class Dice {
 		}
 	}
 	
+	public int[] rollDices() {
+		roll();
+		int dices[]= {dice1, dice2};
+		return dices;
+	}
+	
 	public boolean onDice(int number){
 		if(useDice1 > 0 && dice1 == number) return true;
 		if(useDice2 > 0 && dice2 == number) return true;
