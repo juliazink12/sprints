@@ -48,9 +48,14 @@ public class Dice {
 		return dices;
 	}
 	
-	public boolean onDice(int number){
+	/*public boolean onDice(int number){
 		if(useDice1 > 0 && dice1 == number) return true;
 		if(useDice2 > 0 && dice2 == number) return true;
+		return false;
+	}*/
+	
+	public boolean checkDouble(int[] num) {
+		if(num[0]==num[1])return true;
 		return false;
 	}
 	

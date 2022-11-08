@@ -5,13 +5,13 @@ import java.util.*;
 
 public class Play {
 	
-	public static int[] rollDice() {
+	/*public static int[] rollDice() {
 		Random rand = new Random();;
 		int dice1 = rand.nextInt(6) + 1;
 		int dice2 = rand.nextInt(6) + 1;
 		int[] result = {dice1, dice2};
 		return result;
-	}
+	}*/
 	
 	/*ArrayList<Point> point = new ArrayList<Point>();
 	
