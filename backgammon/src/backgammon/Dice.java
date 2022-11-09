@@ -35,11 +35,11 @@ public class Dice {
 	public void roll(){
 		dice1 = getRollDiceOne();
 		dice2 = getRollDiceTwo();
-		if(dice1 == dice2){
+		/*if(dice1 == dice2){
 			useDice1 = useDice2 = 2;
 		}else{
 			useDice1 = useDice2 = 1;
-		}
+		}*/
 	}
 	
 	public int[] rollDices() {
@@ -48,17 +48,32 @@ public class Dice {
 		return dices;
 	}
 	
-	/*public boolean onDice(int number){
-		if(useDice1 > 0 && dice1 == number) return true;
-		if(useDice2 > 0 && dice2 == number) return true;
-		return false;
-	}*/
+	public boolean isFirstPlayer(int[] p1, int[]p2) {
+		if ((p1[0]+p1[1])>(p1[0]+p2[1])) return true;
+		if ((p1[0]+p1[1])<(p1[0]+p2[1])) return false;
+		else return false;
+	}
+	
+	public boolean isEqualRoll(int[] p1, int[]p2) {
+		if ((p1[0]+p1[1])==(p1[0]+p2[1])) return true;
+		else return false;
+	}
+
 	
 	public boolean checkDouble(int[] num) {
 		if(num[0]==num[1])return true;
 		return false;
 	}
 	
+	public int getDiceOne(){
+		return dice1;
+	}
+	
+	public int getDiceTwo(){
+		return dice2;
+	}
+	
+	/*
 	public void rollDifferent(){
 		do{
 			dice1 = getRollDiceOne();
@@ -69,14 +84,6 @@ public class Dice {
 	
 	public boolean isRolled(){
 		return useDice1 > 0 || useDice2 > 0;
-	}
-	
-	public int getDiceOne(){
-		return dice1;
-	}
-	
-	public int getDiceTwo(){
-		return dice2;
 	}
 	
 	public void useDice(int num){
@@ -100,7 +107,7 @@ public class Dice {
 		useDice2--;
 		return dice2;
 	}
-	
+	*/
 
 	
 }
