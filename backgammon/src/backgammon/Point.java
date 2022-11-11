@@ -49,15 +49,24 @@ public class Point {
 		}
 	}
 	
-	public String pointToString() {
+	public String pointToString(int n) {
 		String res = "";
-		if (checkerList.size()>=1) {
+		res = checkerList.get(n).getDisplayString();
+		
+		/*if (checkerList.size()>=1) {
 			for (int k=0; k<checkerList.size(); k++) {
 				res = res + " " + checkerList.get(k).getDisplayString();
 			}
-		}
+		}*/
 		return res;
 	}
 	
+	public boolean isEmpty() {
+		return checkerList.isEmpty();
+	}
+	
+	public int getSize() {
+		return checkerList.size();
+	}
 
 }

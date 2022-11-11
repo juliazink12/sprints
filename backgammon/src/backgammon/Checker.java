@@ -18,10 +18,11 @@ public class Checker {
 	
 	public String getDisplayString() {
 		if (color) {
-			return ("O");
+			return ("W");
 		}
 		else {
-			return ("\u001B[31mO\u001B[0m");
+			return ("R");
+			//\u001B[31mO\u001B[0m
 		}
 	}
 
