@@ -58,20 +58,23 @@ public class Board {
 		StringBuilder s = new StringBuilder();
 		//print first section
 		s.append("\n1\t2\t3\t4\t5\t6\tBAR\t7\t8\t9\t10\t11\t12\tOFF\n");
-		s.append("|\t|\t|\t|\t|\t|\t||\t|\t|\t|\t|\t|\t|\t ||\n");
+		s.append("|\t|\t|\t|\t|\t|\t||\t|\t|\t|\t|\t|\t|\t| |\n");
 		int x = getMaxSize()+1;
-		s.append(printOneSection(0,6,6,12,x));
+		s.append(printSectionOne(x));
+
+		s.append("===========================================================================================================\n");
+		
 		//print second section
+		s.append(printSectionTwo(x));
+		s.append("|\t|\t|\t|\t|\t|\t||\t|\t|\t|\t|\t|\t|\t| |\n");
 		s.append("13\t14\t15\t16\t17\t18\tBAR\t19\t20\t21\t22\t23\t24\tOFF\n");
-		s.append("|\t|\t|\t|\t|\t|\t||\t|\t|\t|\t|\t|\t|\t||\n");
-		s.append(printOneSection(12,18,18,24,x));
 		System.out.print(s);
 	}
 	
-	public StringBuilder printOneSection(int x1, int y1, int x2, int y2, int n) {
+	public StringBuilder printSectionOne(int n) {
 		StringBuilder s1 = new StringBuilder();
 		for (int m=0; m<n; m++) {
-			for(int l=x1; l<y1; l++) {
+			for(int l=0; l<6; l++) {
 				if(points.get(l).isEmpty()) {
 					s1.append(" ");
 				}else if(points.get(l).getSize()>m) {
@@ -81,9 +84,9 @@ public class Board {
 				}
 				s1.append("\t");
 			}
-			s1.append("||\t");
+			s1.append("| |\t");
 
-			for(int l=x2; l<y2; l++) {
+			for(int l=6; l<12; l++) {
 				if(points.get(l).isEmpty()) {
 					s1.append(" ");
 				}else if(points.get(l).getSize()>m) {
@@ -93,9 +96,39 @@ public class Board {
 				}
 				s1.append("\t");
 			}
-			s1.append("\n");
+			s1.append("| |\n");
 		}
 		return s1;
+	}
+	
+	public StringBuilder printSectionTwo(int n) {
+		StringBuilder s2 = new StringBuilder();
+		for (int m=n-1; m>=0; m--) {
+			for(int l=12; l<18; l++) {
+				if(points.get(l).isEmpty()) {
+					s2.append(" ");
+				}else if(points.get(l).getSize()>m) {
+					s2.append(" "+points.get(l).pointToString(m));
+				}else{
+					s2.append(" ");
+				}
+				s2.append("\t");
+			}
+			s2.append("| |\t");
+
+			for(int l=18; l<24; l++) {
+				if(points.get(l).isEmpty()) {
+					s2.append(" ");
+				}else if(points.get(l).getSize()>m) {
+					s2.append(points.get(l).pointToString(m));
+				}else{
+					s2.append(" ");
+				}
+				s2.append("\t");
+			}
+			s2.append("| |\n");
+		}
+		return s2;
 	}
 	
 	public int getMaxSize() {
