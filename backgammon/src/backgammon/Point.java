@@ -38,7 +38,7 @@ public class Point {
 			return checkerList.get(checkerList.size()-1);
 		}
 		else {
-			return new Checker(false);
+			return null;
 			//CHANGEEEEE
 		}
 	}

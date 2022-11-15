@@ -15,6 +15,14 @@ public class Checker {
 	public boolean getColor() {
 		return color;
 	}
+
+	public boolean isWhite() {
+		return color;
+	}
+	
+	public boolean isRed() {
+		return !color;
+	}
 	
 	public String getDisplayString() {
 		if (color) {
