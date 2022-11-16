@@ -7,6 +7,7 @@ public class Board {
 	ArrayList<Checker> checkers;
 	Dice dices;
 	ArrayList<Checker> bar;
+	ArrayList<Checker> bar2;
 	ArrayList<Checker> off1;
 	ArrayList<Checker> off2;
 
@@ -15,6 +16,7 @@ public class Board {
 		points = new ArrayList<Point>();
 		dices = new Dice();
 		bar = new ArrayList<Checker>();
+		bar2 = new ArrayList<Checker>();
 		off1 = new ArrayList<Checker>();
 		off2 = new ArrayList<Checker>();
 
@@ -91,7 +93,11 @@ public class Board {
 				}
 				s1.append("\t");
 			}
-			s1.append("| |\t");
+			if (bar != null && bar.size() > m) {
+				s1.append(" " + bar.get(m).getDisplayString() + " \t");
+			} else {
+				s1.append("| |\t");
+			}
 
 			for (int l = 6 - 1; l >= 0; l--) {
 				if (points.get(l).isEmpty()) {
@@ -125,7 +131,11 @@ public class Board {
 				}
 				s2.append("\t");
 			}
-			s2.append("| |\t");
+			if (bar2 != null && bar2.size() > m) {
+				s2.append(" " + bar2.get(m).getDisplayString() + " \t");
+			} else {
+				s2.append("| |\t");
+			}
 
 			for (int l = 18; l < 24; l++) {
 				if (points.get(l).isEmpty()) {
@@ -170,13 +180,17 @@ public class Board {
 	
 	public ArrayList<Path> getPathByColor(boolean isWhite, int dice) {
 		ArrayList<Point> p = getPointsByColor(isWhite);
-		ArrayList<Point> b = getPointsToBar(isWhite, dice);
 		ArrayList<Path> paths = new ArrayList<>();
 
 		int dir = isWhite ? 1 : -1;
 		for (Point point : p) {
 			int nextNumber = point.number + dir * dice;
 			Point end = getPointByNumber(nextNumber);
+			if (end != null && end.getSize() == 1 && end.getLastChecker().color != isWhite) {
+				Path path = new Path(point, end, isWhite);
+				paths.add(path);
+				continue;
+			}
 			if (end != null && end.getLastChecker() != null && end.getLastChecker().color != isWhite) {
 				continue;
 			}
@@ -184,6 +198,20 @@ public class Board {
 			paths.add(path);
 		}
 		return paths;
+	}
+	
+	public void moveCheckerToBar(Point start, Point end, boolean isWhite) {
+		moveToBar(end);
+		end.checkerList.remove(0);
+		end.addChecker(start.getLastChecker());
+		start.checkerList.remove(start.getSize() - 1);
+		for (Point point : points) {
+			if (point.getNumber() == start.getNumber()) {
+				point = start;
+			} else if (point.getNumber() == end.getNumber()) {
+				point = end;
+			}
+		}
 	}
 	
 	public Point getPointByNumber(int number) {
@@ -194,18 +222,6 @@ public class Board {
 		return null;
 	}
 
-	public ArrayList<Point> getPointsToBar(boolean isWhite,int dice) {
-		ArrayList<Point> pointToBar = new ArrayList<>();
-		int dir = isWhite ? 1 : -1;
-		ArrayList<Point> p = getPointsByColor(!isWhite);
-		for (Point point : p) {
-			if (point.getSize() == 1) {
-				int nextNumber = point.number + dir * dice;
-				pointToBar.add(getPointByNumber(nextNumber));
-			}
-		}
-		return pointToBar;
-	}
 	
 	public boolean checkGameOver(boolean isWhite) {
 		boolean over = true;
@@ -244,10 +260,12 @@ public class Board {
 		
 	}
 	
-	public ArrayList<Checker> moveToBar(Point start){
-		bar.add(start.getLastChecker());
-		
-		return bar;
+	public void moveToBar(Point end){
+		if (end.number <= 2) {
+			bar.add(end.getLastChecker());
+		} else {
+			bar2.add(end.getLastChecker());
+		}
 	}
 	
 	public ArrayList<Point> updateMoveToOff(Point start){

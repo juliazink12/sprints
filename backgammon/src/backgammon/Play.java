@@ -42,7 +42,7 @@ public class Play {
 		System.out.println("Name of player 2?");
 		String name2 = in.nextLine();
 		
-		int currentPlayer = 1;
+		int currentPlayer = dice.rollToStart();
 		String currentPlayerName;
 		
 		
@@ -91,13 +91,10 @@ public class Play {
 					// Dice1
 					System.out.println(currentPlayerName + "to play " + result[0] + "-" + result[1] + " Select from:");
 					choices1.add(choice1 + " ");
-					//ArrayList<Point> pointToBar1 = board.getPointsToBar(currentPlayer==1,result[0]);
+					
 					for (int i = 0; i < dice1Paths.size(); i++) {
 						start1.add(dice1Paths.get(i).start);
 						end1.add(dice1Paths.get(i).end);
-//						if (pointToBar1!=null&&pointToBar1.size()<i) {
-//								System.out.println(choice1 + " " + start1.get(i).number + "->" + pointToBar1.get(i).number);
-//						}
 						
 						System.out.println(choice1 + " " + (start1.get(i) != null ? start1.get(i).number : "OFF")
 									+ "->" + (end1.get(i) != null ? end1.get(i).number : "OFF"));
@@ -124,9 +121,8 @@ public class Play {
 								off2 = board.moveCheckerToOff(start1.get(index1), currentPlayer == 1);
 							}
 							point = board.updateMoveToOff(start1.get(index1));
-//						}else if (start1.get(index1)!=null && end1.get(index1) != null&& end1.get(index1).getSize()==1) {
-//							bar = board.moveToBar(end1.get(index1));
-//							point = board.moveChecker(start1.get(index1), end1.get(index1));
+						}else if (end1.get(index1).getSize()==1) {
+							board.moveCheckerToBar(start1.get(index1), end1.get(index1), currentPlayer==1);
 						}else {
 							point = board.moveChecker(start1.get(index1), end1.get(index1));
 						}
@@ -139,14 +135,11 @@ public class Play {
 					if (usingDice1 && update1) {
 						System.out.println(currentPlayerName + "to play " + result[1] + " Select from:");
 						choices2.add(choice2 + " ");
-						//ArrayList<Point> pointToBar2 = board.getPointsToBar(currentPlayer==1,result[1]);
+						
 						for (int j = 0; j < dice2Paths.size(); j++) {
 							start2.add(dice2Paths.get(j).start);
 							end2.add(dice2Paths.get(j).end);
 							
-//							if (pointToBar2!=null&&pointToBar2.size()<j) {
-//								System.out.println(choice2 + " " + start2.get(j).number + "->" + pointToBar2.get(j).number);
-//						}
 							System.out.println(choice2 + " " + (start2.get(j) != null ? start2.get(j).number : "OFF")
 										+ "->" + (end2.get(j) != null ? end2.get(j).number : "OFF"));
 							
@@ -172,9 +165,8 @@ public class Play {
 									off2 = board.moveCheckerToOff(start2.get(index2), currentPlayer == 1);
 								}
 								point = board.updateMoveToOff(start2.get(index2));
-//							}else if (start2.get(index2)!=null && end2.get(index2) != null&& end2.get(index2).getSize()==1) {
-//								bar = board.moveToBar(end2.get(index2));
-//								point = board.moveChecker(start2.get(index2), end2.get(index2));
+							}else if (end2.get(index2).getSize()==1) {
+								board.moveCheckerToBar(start2.get(index2), end2.get(index2), currentPlayer==1);
 							}else {
 								point = board.moveChecker(start2.get(index2), end2.get(index2));
 							}

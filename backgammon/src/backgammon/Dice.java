@@ -14,12 +14,24 @@ public class Dice {
 		rand = new Random();
 	}
 	
-	public Dice(Dice d) {
-		dice1 = d.dice1;
-		dice2 = d.dice2;
-		useDice1 = d.useDice1;
-		useDice2 = d.useDice2;
-		rand = new Random();
+	
+	public int rollToStart() {
+		Scanner in = new Scanner(System.in);
+		System.out.println("Player 1: roll to start");
+		String input = in.nextLine();
+		int[] result1 =rollDices();
+		int player1Roll =result1[0]+result1[1];
+		System.out.println(result1[0]+","+result1[1]);
+
+		System.out.println("Player 2: roll to start");
+		String input2 = in.nextLine();
+		int[] result2 =rollDices();
+		int player2Roll =result2[0]+result2[1];
+		System.out.println(result2[0]+","+result2[1]);
+		
+		if(player1Roll>player2Roll) {
+			return 1;
+		}return 2;
 	}
 	
 	public int getRollDiceOne () {
