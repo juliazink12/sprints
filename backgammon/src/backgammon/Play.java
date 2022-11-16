@@ -53,10 +53,18 @@ public class Play {
 			else {
 				currentPlayerName = name2.toUpperCase();
 			}
-			System.out.println(currentPlayerName + ": Type 'roll' or 'quit'");
+			System.out.println(currentPlayerName + ": Type 'roll' or 'quit' or 'hint' or 'pip'");
 			newInput = in.nextLine().trim().toUpperCase();
 			if (newInput.equals("QUIT")) {
 				quit = true;
+			}
+			
+			if (newInput.equals("PIP")) {
+				board.displayPipCount();
+			}
+			
+			if (newInput.equals("HINT")) {
+				System.out.println(" Type 'roll' to roll the dice\n Type a letter to pick a move\n Type 'pip' to get the pip counts\n Type 'hint' for help\n Type 'quit' to quit");
 			}
 			
 			if (newInput.equals("ROLL")) {

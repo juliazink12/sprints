@@ -277,5 +277,22 @@ public class Board {
 		}
 		return points;
 	}
+	
+	public void displayPipCount() {
+		int pip1 = 0;
+		ArrayList<Point> whitePoints = getPointsByColor(true);
+		for(Point p : whitePoints) {
+			int ind = p.getNumber();
+			pip1 = pip1 + (25-ind)*p.getSize();
+		}
+		int pip2 = 0;
+		ArrayList<Point> redPoints = getPointsByColor(false);
+		for(Point p : redPoints) {
+			int ind = p.getNumber();
+			pip2 = pip2 + ind*p.getSize();
+		}
+		System.out.println("Pipcounts. White: " + pip1 + ", Red: " + pip2);
+		
+	}
 
 }
