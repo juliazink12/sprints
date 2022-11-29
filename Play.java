@@ -5,6 +5,12 @@ import java.util.*;
 
 public class Play {
 
+	/*
+	 * public static int[] rollDice() { Random rand = new Random();; int dice1 =
+	 * rand.nextInt(6) + 1; int dice2 = rand.nextInt(6) + 1; int[] result = {dice1,
+	 * dice2}; return result; }
+	 */
+
 	public static void main(String[] args) {
 		
 		Dice dice = new Dice();
@@ -12,16 +18,16 @@ public class Play {
 		Board board = new Board();
 		
 		ArrayList<Point> point = new ArrayList<Point>();
-		ArrayList<Checker> barRed = new ArrayList<Checker>();
-		ArrayList<Checker> barWhite = new ArrayList<Checker>();
-		ArrayList<Checker> offRed = new ArrayList<Checker>();
-		ArrayList<Checker> offWhite = new ArrayList<Checker>();
+		ArrayList<Checker> bar = new ArrayList<Checker>();
+		ArrayList<Checker> off1 = new ArrayList<Checker>();
+		ArrayList<Checker> off2 = new ArrayList<Checker>();
 
 		point = board.points;
-		barRed = board.barRed;
-		barRed = board.barWhite;
-		offRed = board.offRed;
-		offWhite = board.offWhite;
+		bar = board.bar;
+		off1 = board.off1;
+		off2 = board.off2;
+		
+		point = board.points;
 		board.setUp();
 		
 		view.welcomePlayers();
@@ -31,12 +37,14 @@ public class Play {
 		Scanner in = new Scanner(System.in);
 		String newInput;
 		
-		view.askNames();
-		String name1 = view.playerOne;
-		String name2 = view.playerTwo;
+		System.out.println("Name of player 1?");
+		String name1 = in.nextLine();
+		System.out.println("Name of player 2?");
+		String name2 = in.nextLine();
 		
 		int currentPlayer = dice.rollToStart();
 		String currentPlayerName;
+		
 		
 		while(!quit) {
 			if (currentPlayer == 1) {
@@ -64,10 +72,19 @@ public class Play {
 				//int[] result = rollDice();
 				System.out.println(result[0] + ", " + result[1]);
 				ArrayList<Path> dice1Paths = board.getPathByColor(currentPlayer == 1, result[0]);
+				ArrayList<Path> dice2Paths = board.getPathByColor(currentPlayer == 1, result[1]);
+
 				char choice1 = 'A';
+				char choice2 = 'A';
+
 				ArrayList<String> choices1 = new ArrayList<>();
+				ArrayList<String> choices2 = new ArrayList<>();
+
 				ArrayList<Point> start1 = new ArrayList<>();
 				ArrayList<Point> end1 = new ArrayList<>();
+
+				ArrayList<Point> start2 = new ArrayList<>();
+				ArrayList<Point> end2 = new ArrayList<>();
 				
 				
 				boolean usingDice1 = false;
@@ -85,9 +102,9 @@ public class Play {
 					
 					for (int i = 0; i < dice1Paths.size(); i++) {
 						start1.add(dice1Paths.get(i).start);
-						end1.add(dice1Paths.get(i).end);						
+						end1.add(dice1Paths.get(i).end);
 						
-						System.out.println(choice1 + " " + (start1.get(i) != null ? start1.get(i).number : "BAR")
+						System.out.println(choice1 + " " + (start1.get(i) != null ? start1.get(i).number : "OFF")
 									+ "->" + (end1.get(i) != null ? end1.get(i).number : "OFF"));
 						
 						choice1++;
@@ -105,30 +122,24 @@ public class Play {
 						}
 					}
 					if (update1) {
-                        if (end1.get(index1) == null) {
-                            if (currentPlayer == 1) {
-                                offRed = board.moveCheckerToOff(start1.get(index1), currentPlayer == 1);
-                            } else {
-                                offWhite = board.moveCheckerToOff(start1.get(index1), currentPlayer == 1);
-                            }
-                            point = board.updateMoveToOff(start1.get(index1));
-                        } else if (end1.get(index1).getSize() == 1) {
-                            board.moveCheckerToBar(start1.get(index1), end1.get(index1), currentPlayer == 1);
-                        } else {
-                            board.moveChecker(start1.get(index1), end1.get(index1), currentPlayer == 1);
-                        }
-                    } else {
-                        System.out.print("Incorrect input");
+						if (end1.get(index1) == null) { 
+							if(currentPlayer == 1) {
+								off1 = board.moveCheckerToOff(start1.get(index1), currentPlayer == 1);
+							}else {
+								off2 = board.moveCheckerToOff(start1.get(index1), currentPlayer == 1);
+							}
+							point = board.updateMoveToOff(start1.get(index1));
+						}else if (end1.get(index1).getSize()==1) {
+							board.moveCheckerToBar(start1.get(index1), end1.get(index1), currentPlayer==1);
+						}else {
+							point = board.moveChecker(start1.get(index1), end1.get(index1));
+						}
+					} else {
+						System.out.print("Incorrect input");
 					}
 					board.printBoard();
 
 					// Dice2
-					ArrayList<Path> dice2Paths = board.getPathByColor(currentPlayer == 1, result[1]);
-					char choice2 = 'A';
-					ArrayList<String> choices2 = new ArrayList<>();
-					ArrayList<Point> start2 = new ArrayList<>();
-					ArrayList<Point> end2 = new ArrayList<>();
-					
 					if (usingDice1 && update1) {
 						System.out.println(currentPlayerName + "to play " + result[1] + " Select from:");
 						choices2.add(choice2 + " ");
@@ -137,7 +148,7 @@ public class Play {
 							start2.add(dice2Paths.get(j).start);
 							end2.add(dice2Paths.get(j).end);
 							
-							System.out.println(choice2 + " " + (start2.get(j) != null ? start2.get(j).number : "BAR")
+							System.out.println(choice2 + " " + (start2.get(j) != null ? start2.get(j).number : "OFF")
 										+ "->" + (end2.get(j) != null ? end2.get(j).number : "OFF"));
 							
 							choice2++;
@@ -155,19 +166,19 @@ public class Play {
 							}
 						}
 						if (update2) {
-                            if (end2.get(index2) == null) {
-                                if (currentPlayer == 1) {
-                                    offRed = board.moveCheckerToOff(start2.get(index2), currentPlayer == 1);
-                                } else {
-                                    offWhite = board.moveCheckerToOff(start2.get(index2), currentPlayer == 1);
-                                }
-                                point = board.updateMoveToOff(start2.get(index2));
-                            } else if (end2.get(index2).getSize() == 1) {
-                                board.moveCheckerToBar(start2.get(index2), end2.get(index2), currentPlayer == 1);
-                            } else {
-                                board.moveChecker(start2.get(index2), end2.get(index2), currentPlayer == 1);
-                            }
-                        } else {
+							if (end2.get(index2) == null){
+								if(currentPlayer == 1) {
+									off1 = board.moveCheckerToOff(start2.get(index2), currentPlayer == 1);
+								}else {
+									off2 = board.moveCheckerToOff(start2.get(index2), currentPlayer == 1);
+								}
+								point = board.updateMoveToOff(start2.get(index2));
+							}else if (end2.get(index2).getSize()==1) {
+								board.moveCheckerToBar(start2.get(index2), end2.get(index2), currentPlayer==1);
+							}else {
+								point = board.moveChecker(start2.get(index2), end2.get(index2));
+							}
+						} else {
 							System.out.print("Incorrect input");
 						}
 
@@ -181,7 +192,7 @@ public class Play {
 		
 		if (quit) {
 			System.out.println("Game ended");
-		} else if (board.checkWin(currentPlayer == 1)) {
+		} else if (board.checkGameOver(currentPlayer == 1)) {
 			System.out.println("Game Over!");
 		}
 		

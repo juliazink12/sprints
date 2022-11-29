@@ -5,20 +5,18 @@ public class Board {
 
 	ArrayList<Point> points;
 	ArrayList<Checker> checkers;
-	Dice dices;
-	ArrayList<Checker> bar;
-	ArrayList<Checker> bar2;
-	ArrayList<Checker> off1;
-	ArrayList<Checker> off2;
+	ArrayList<Checker> barRed;
+	ArrayList<Checker> barWhite;
+	ArrayList<Checker> offRed;
+	ArrayList<Checker> offWhite;
 
 	public Board() {
 
 		points = new ArrayList<Point>();
-		dices = new Dice();
-		bar = new ArrayList<Checker>();
-		bar2 = new ArrayList<Checker>();
-		off1 = new ArrayList<Checker>();
-		off2 = new ArrayList<Checker>();
+		barRed = new ArrayList<Checker>();
+		barWhite = new ArrayList<Checker>();
+		offRed = new ArrayList<Checker>();
+		offWhite = new ArrayList<Checker>();
 
 		for (int i = 1; i <= 24; i++) {
 			if (i <= 6) {
@@ -64,7 +62,7 @@ public class Board {
 	}
 
 	public void printBoard() {
-		
+
 		StringBuilder s = new StringBuilder();
 		// print first section
 		s.append("\n12\t11\t10\t9\t8\t7\tBAR\t6\t5\t4\t3\t2\t1\tOFF\n");
@@ -81,80 +79,85 @@ public class Board {
 	}
 
 	public StringBuilder printSectionOne(int n) {
-		StringBuilder s1 = new StringBuilder();
-		for (int m = 0; m < n; m++) {
-			for (int l = 12 - 1; l >= 6; l--) {
-				if (points.get(l).isEmpty()) {
-					s1.append(" ");
-				} else if (points.get(l).getSize() > m) {
-					s1.append(points.get(l).pointToString(m) + " ");
-				} else {
-					s1.append(" ");
-				}
-				s1.append("\t");
-			}
-			if (bar != null && bar.size() > m) {
-				s1.append(" " + bar.get(m).getDisplayString() + " \t");
-			} else {
-				s1.append("| |\t");
-			}
+        StringBuilder s1 = new StringBuilder();
+        for (int m = 0; m < n; m++) {
+            for (int l = 12 - 1; l >= 6; l--) {
+                if (points.get(l).isEmpty()) {
+                    s1.append(" ");
+                } else if (points.get(l).getSize() > m) {
+                    s1.append(points.get(l).pointToString(m) + " ");
+                } else {
+                    s1.append(" ");
+                }
+                s1.append("\t");
+            }
+            //Upper Bar
+            if (barRed != null && barRed.size() > m) {
+                s1.append(" " + barRed.get(m).getDisplayString() + " \t");
+            } else {
+                s1.append("| |\t");
+            }
 
-			for (int l = 6 - 1; l >= 0; l--) {
-				if (points.get(l).isEmpty()) {
-					s1.append(" ");
-				} else if (points.get(l).getSize() > m) {
-					s1.append(points.get(l).pointToString(m));
-				} else {
-					s1.append(" ");
-				}
-				s1.append("\t");
-			}
-			if (off1 != null && off1.size()>m) {
-				s1.append(" "+off1.get(m).getDisplayString()+"\n");
-			}else {
-				s1.append("| |\n");
-			}
-		}
-		return s1;
-	}
+            for (int l = 6 - 1; l >= 0; l--) {
+                if (points.get(l).isEmpty()) {
+                    s1.append(" ");
+                } else if (points.get(l).getSize() > m) {
+                    s1.append(points.get(l).pointToString(m));
+                } else {
+                    s1.append(" ");
+                }
+                s1.append("\t");
+            }
+            //Upper Off
+            if (offRed != null && offRed.size() > m) {
+                s1.append(" " + offRed.get(m).getDisplayString() + "\n");
+            } else {
+                s1.append("| |\n");
+            }
+        }
+        return s1;
+    }
 
-	public StringBuilder printSectionTwo(int n) {
-		StringBuilder s2 = new StringBuilder();
-		for (int m = n - 1; m >= 0; m--) {
-			for (int l = 12; l < 18; l++) {
-				if (points.get(l).isEmpty()) {
-					s2.append(" ");
-				} else if (points.get(l).getSize() > m) {
-					s2.append(points.get(l).pointToString(m) + " ");
-				} else {
-					s2.append(" ");
-				}
-				s2.append("\t");
-			}
-			if (bar2 != null && bar2.size() > m) {
-				s2.append(" " + bar2.get(m).getDisplayString() + " \t");
-			} else {
-				s2.append("| |\t");
-			}
+    public StringBuilder printSectionTwo(int n) {
+        StringBuilder s2 = new StringBuilder();
+        for (int m = n - 1; m >= 0; m--) {
+            for (int l = 12; l < 18; l++) {
+                if (points.get(l).isEmpty()) {
+                    s2.append(" ");
+                } else if (points.get(l).getSize() > m) {
+                    s2.append(points.get(l).pointToString(m) + " ");
+                } else {
+                    s2.append(" ");
+                }
+                s2.append("\t");
+            }
+            //Lower Bar
+            if (barWhite != null && barWhite.size() > m) {
+                s2.append(" " + barWhite.get(m).getDisplayString() + " \t");
+            } else {
+                s2.append("| |\t");
+            }
 
-			for (int l = 18; l < 24; l++) {
-				if (points.get(l).isEmpty()) {
-					s2.append(" ");
-				} else if (points.get(l).getSize() > m) {
-					s2.append(points.get(l).pointToString(m));
-				} else {
-					s2.append(" ");
-				}
-				s2.append("\t");
-			}
-			if (off2 != null && off2.size()> m) {
-				s2.append(" "+off2.get(m).getDisplayString()+"\n");
-			}else {
-				s2.append("| |\n");
-			}
-		}
-		return s2;
-	}
+            for (int l = 18; l < 24; l++) {
+                if (points.get(l).isEmpty()) {
+                    s2.append(" ");
+                } else if (points.get(l).getSize() > m) {
+                    s2.append(points.get(l).pointToString(m));
+                } else {
+                    s2.append(" ");
+                }
+                s2.append("\t");
+            }
+            //Lower Bar
+            if (offWhite != null && offWhite.size() > m) {
+                s2.append(" " + offWhite.get(m).getDisplayString() + "\n");
+            } else {
+                s2.append("| |\n");
+            }
+        }
+        return s2;
+    }
+
 
 	public int getMaxSize() {
 		int maxSize = -1;
@@ -165,10 +168,10 @@ public class Board {
 		}
 		return maxSize;
 	}
-	
+
 	public ArrayList<Point> getPointsByColor(boolean isWhite) {
 		ArrayList<Point> p = new ArrayList<>();
-		
+
 		for (Point point : points) {
 			Checker c = point.getLastChecker();
 			if (c != null && c.getColor() == isWhite) {
@@ -177,10 +180,18 @@ public class Board {
 		}
 		return p;
 	}
-	
+
 	public ArrayList<Path> getPathByColor(boolean isWhite, int dice) {
 		ArrayList<Point> p = getPointsByColor(isWhite);
 		ArrayList<Path> paths = new ArrayList<>();
+
+		ArrayList<Checker> bar = isWhite ? barWhite : barRed;
+		if (bar.size() > 0) {
+			Point end = getPointByNumber(dice);
+			Path path = new Path(null, end, isWhite);
+			paths.add(path);
+			return paths;
+		}
 
 		int dir = isWhite ? 1 : -1;
 		for (Point point : p) {
@@ -199,21 +210,40 @@ public class Board {
 		}
 		return paths;
 	}
-	
+
 	public void moveCheckerToBar(Point start, Point end, boolean isWhite) {
-		moveToBar(end);
-		end.checkerList.remove(0);
-		end.addChecker(start.getLastChecker());
-		start.checkerList.remove(start.getSize() - 1);
-		for (Point point : points) {
-			if (point.getNumber() == start.getNumber()) {
-				point = start;
-			} else if (point.getNumber() == end.getNumber()) {
-				point = end;
+		if (start == null) {
+
+			Checker last = end.getLastChecker();
+			if (last.getColor() != isWhite) {
+				ArrayList<Checker> otherBar = !isWhite ? barWhite : barRed;
+				otherBar.add(end.checkerList.get(0));
+				end.checkerList.remove(0);
+			}
+
+			ArrayList<Checker> bar = isWhite ? barWhite : barRed;
+			Checker checker = bar.get(0);
+			bar.remove(0);
+			end.addChecker(checker);
+
+		} else {
+
+			ArrayList<Checker> otherBar = !isWhite ? barWhite : barRed;
+			otherBar.add(end.checkerList.get(0));
+
+			end.checkerList.remove(0);
+			end.addChecker(start.getLastChecker());
+			start.checkerList.remove(start.getSize() - 1);
+			for (Point point : points) {
+				if (point.getNumber() == start.getNumber()) {
+					point = start;
+				} else if (point.getNumber() == end.getNumber()) {
+					point = end;
+				}
 			}
 		}
 	}
-	
+
 	public Point getPointByNumber(int number) {
 		for (Point point : points) {
 			if (point.number == number)
@@ -222,53 +252,41 @@ public class Board {
 		return null;
 	}
 
-	
-	public boolean checkGameOver(boolean isWhite) {
-		boolean over = true;
-		ArrayList<Point> p = getPointsByColor(isWhite);
-		for (Point point : p) {
-			if (point.getSize() != 0) {
-				over = false;
-				break;
-			}
-		}
-		return over;
+	public boolean checkWin(boolean isWhite) {
+		return isWhite ? offWhite.size() == 15 : offRed.size() == 15;
 	}
-	
-	
-	public ArrayList<Point> moveChecker(Point start, Point end) {
-		end.addChecker(start.getLastChecker());
-		start.checkerList.remove(start.getSize() - 1);
-		for (Point point : points) {
-			if (point.getNumber() == start.getNumber()) {
-				point = start;
-			} else if (point.getNumber() == end.getNumber()) {
-				point = end;
-			}
-		}
-		return points;
-	}
-	
-	public ArrayList<Checker> moveCheckerToOff(Point start, boolean isWhite) {
-		if(!isWhite) {
-			off1.add(start.getLastChecker());
-			return off1;
-		}else {
-			off2.add(start.getLastChecker());
-			return off2;
-		}
-		
-	}
-	
-	public void moveToBar(Point end){
-		if (end.number <= 2) {
-			bar.add(end.getLastChecker());
+
+	public void moveChecker(Point start, Point end, boolean isWhite) {
+		if (start == null) {
+			ArrayList<Checker> bar = isWhite ? barWhite : barRed;
+			Checker checker = bar.get(0);
+			bar.remove(0);
+			end.addChecker(checker);
 		} else {
-			bar2.add(end.getLastChecker());
+			end.addChecker(start.getLastChecker());
+			start.checkerList.remove(start.getSize() - 1);
+			for (Point point : points) {
+				if (point.getNumber() == start.getNumber()) {
+					point = start;
+				} else if (point.getNumber() == end.getNumber()) {
+					point = end;
+				}
+			}
 		}
 	}
-	
-	public ArrayList<Point> updateMoveToOff(Point start){
+
+	public ArrayList<Checker> moveCheckerToOff(Point start, boolean isWhite) {
+		if (!isWhite) {
+			offRed.add(start.getLastChecker());
+			return offRed;
+		} else {
+			offWhite.add(start.getLastChecker());
+			return offWhite;
+		}
+
+	}
+
+	public ArrayList<Point> updateMoveToOff(Point start) {
 		start.checkerList.remove(start.getSize() - 1);
 		for (Point point : points) {
 			if (point.getNumber() == start.getNumber()) {
@@ -277,22 +295,22 @@ public class Board {
 		}
 		return points;
 	}
-	
+
 	public void displayPipCount() {
 		int pip1 = 0;
 		ArrayList<Point> whitePoints = getPointsByColor(true);
-		for(Point p : whitePoints) {
+		for (Point p : whitePoints) {
 			int ind = p.getNumber();
-			pip1 = pip1 + (25-ind)*p.getSize();
+			pip1 = pip1 + (25 - ind) * p.getSize();
 		}
 		int pip2 = 0;
 		ArrayList<Point> redPoints = getPointsByColor(false);
-		for(Point p : redPoints) {
+		for (Point p : redPoints) {
 			int ind = p.getNumber();
-			pip2 = pip2 + ind*p.getSize();
+			pip2 = pip2 + ind * p.getSize();
 		}
 		System.out.println("Pipcounts. White: " + pip1 + ", Red: " + pip2);
-		
+
 	}
 
 }

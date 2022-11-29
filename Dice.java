@@ -18,33 +18,20 @@ public class Dice {
 	public int rollToStart() {
 		Scanner in = new Scanner(System.in);
 		System.out.println("Player 1: roll to start");
-		String input = in.nextLine().trim().toUpperCase();
-		if(!input.equals("ROLL")){
-			System.out.println("Incorrect");
-			return rollToStart();
-		}
+		String input = in.nextLine();
 		int[] result1 =rollDices();
 		int player1Roll =result1[0]+result1[1];
 		System.out.println(result1[0]+","+result1[1]);
 
 		System.out.println("Player 2: roll to start");
-		String input2 = in.nextLine().trim().toUpperCase();
-		if(!input2.equals("ROLL")){
-			System.out.println("Incorrect");
-			return rollToStart();
-		}
+		String input2 = in.nextLine();
 		int[] result2 =rollDices();
 		int player2Roll =result2[0]+result2[1];
 		System.out.println(result2[0]+","+result2[1]);
 		
-		if(player1Roll==player2Roll) {
-			System.out.println("Tie! Please roll again");
-			return rollToStart();
-		}else if(player1Roll>player2Roll) {
+		if(player1Roll>player2Roll) {
 			return 1;
-		}else{
-			return 2;
-		}
+		}return 2;
 	}
 	
 	public int getRollDiceOne () {
@@ -71,6 +58,17 @@ public class Dice {
 		roll();
 		int dices[]= {dice1, dice2};
 		return dices;
+	}
+	
+	public boolean isFirstPlayer(int[] p1, int[]p2) {
+		if ((p1[0]+p1[1])>(p1[0]+p2[1])) return true;
+		if ((p1[0]+p1[1])<(p1[0]+p2[1])) return false;
+		else return false;
+	}
+	
+	public boolean isEqualRoll(int[] p1, int[]p2) {
+		if ((p1[0]+p1[1])==(p1[0]+p2[1])) return true;
+		else return false;
 	}
 
 	
