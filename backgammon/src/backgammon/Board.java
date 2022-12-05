@@ -1,4 +1,4 @@
-//package backgammon;
+package backgammon;
 import java.util.*;
 
 public class Board {
@@ -311,6 +311,10 @@ public class Board {
 		}
 		System.out.println("Pipcounts. White: " + pip1 + ", Red: " + pip2);
 
+	}
+	
+	public void displayStats(int matchScore, int matchLength) {
+		System.out.println("\nMatch score:\n" + matchScore + "\nMatch length: " + (matchLength/2) + "\n");
 	}
 
 }

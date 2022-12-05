@@ -1,4 +1,4 @@
-//package backgammon;
+package backgammon;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -8,7 +8,7 @@ class DiceTest {
 
 	@Test
 	void test() {
-		fail("Not yet implemented");
+		//fail("Not yet implemented");
 	}
 
 }
