@@ -1,4 +1,4 @@
-package backgammon;
+//package backgammon;
 
 public class Path {
 

@@ -1,0 +1,16 @@
+/.classpath
+/.project
+/Board.class
+/BoardTest.class
+/Checker.class
+/CheckerTest.class
+/Dice.class
+/DiceTest.class
+/Path.class
+/PathTest.class
+/Play.class
+/PlayTest.class
+/Point.class
+/PointTest.class
+/View.class
+/ViewTest.class
