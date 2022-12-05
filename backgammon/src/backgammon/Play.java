@@ -59,8 +59,18 @@ public class Play {
 				System.out.println(" Type 'roll' to roll the dice\n Type a letter to pick a move\n Type 'pip' to get the pip counts\n Type 'hint' for help\n Type 'quit' to quit");
 			}
 			
-			if (newInput.equals("ROLL")) {
-				int[] result = dice.rollDices();
+			if (newInput.equals("ROLL") || newInput.startsWith("DICE")) {
+				int[] result = {0,0};
+				if (newInput.equals("ROLL")) {
+					result = dice.rollDices();
+				}
+				else {
+					// take two integers of input
+					int firstDice = newInput.charAt(5);
+					int secondDice = newInput.charAt(6);
+					result[0] = firstDice;
+					result[1] = secondDice;
+				}
 				//int[] result = rollDice();
 				System.out.println(result[0] + ", " + result[1]);
 				ArrayList<Path> dice1Paths = board.getPathByColor(currentPlayer == 1, result[0]);
