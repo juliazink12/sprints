@@ -252,8 +252,20 @@ public class Board {
 		return null;
 	}
 
-	public boolean checkWin(boolean isWhite) {
+	/*public boolean checkWin(boolean isWhite) {
 		return isWhite ? offWhite.size() == 15 : offRed.size() == 15;
+	}*/
+	
+	public int checkWin() {
+		if (offWhite.size() == 15) {
+			return 1;
+		}
+		else if (offRed.size() == 15) {
+			return 2;
+		}
+		else {
+			return 0;
+		}
 	}
 
 	public void moveChecker(Point start, Point end, boolean isWhite) {
@@ -313,8 +325,8 @@ public class Board {
 
 	}
 	
-	public void displayStats(int matchScore, int matchLength) {
-		System.out.println("\nMatch score:\n" + matchScore + "\nMatch length: " + (matchLength/2) + "\n");
+	public void displayStats(int doublingCube, int matchLength) {
+		System.out.println("\nMatch score:\n" + doublingCube + "\nMatch length: " + (matchLength/2) + "\n");
 	}
 
 }
