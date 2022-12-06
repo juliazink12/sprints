@@ -50,14 +50,7 @@ public class Point {
 	}
 	
 	public String pointToString(int n) {
-		String res = "";
-		res = checkerList.get(n).getDisplayString();
-		
-		/*if (checkerList.size()>=1) {
-			for (int k=0; k<checkerList.size(); k++) {
-				res = res + " " + checkerList.get(k).getDisplayString();
-			}
-		}*/
+		String res = checkerList.get(n).getDisplayString();
 		return res;
 	}
 	
