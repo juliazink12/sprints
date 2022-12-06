@@ -2,13 +2,31 @@ package backgammon;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 class BoardTest {
+	
+	private Board board;
 
-	@Test
-	void test() {
-		//fail("Not yet implemented");
+	@BeforeEach
+	void setUp() {
+		board = new Board();
+		board.setUp();
 	}
+	
+	@Test
+	void testBoard() {
+		assertNotNull(board);
+	}
+	
+	@Test
+	void testGetMaxSize() {
+		assertEquals(5, board.getMaxSize());
+	}
+	
+	
+	
+	
 
 }

@@ -126,42 +126,6 @@ public class Dice {
 	public void setDoubledAtLeastOnce() {
 		doubledAtLeastOnce = true;
 	}
-	
-	/*
-	public void rollDifferent(){
-		do{
-			dice1 = getRollDiceOne();
-			dice2 = getRollDiceTwo();
-		}while(dice1 == dice2);
-		useDice1 = useDice2 = 1;
-	}
-	
-	public boolean isRolled(){
-		return useDice1 > 0 || useDice2 > 0;
-	}
-	
-	public void useDice(int num){
-		if(useDice1 > 0 && dice1 == num){
-			useDice1--;
-		}else if(useDice2 > 0 && dice2 == num){
-			useDice2--;
-		}else{
-			throw new IllegalArgumentException("Trying to take invalid dice " + num);
-		}
-	}
-	
-	public int useDiceOne(){
-		if(useDice1 == 0) return 0;
-		useDice1--;
-		return dice1;
-	}
-	
-	public int useDiceTwo(){
-		if(useDice2 == 0) return 0;
-		useDice2--;
-		return dice2;
-	}
-	*/
 
 	
 }

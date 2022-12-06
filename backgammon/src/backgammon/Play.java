@@ -54,11 +54,11 @@ public class Play {
 				} else {
 					currentPlayerName = name2.toUpperCase();
 				}
-				System.out.println(currentPlayerName + ": Type 'roll' or 'quit' or 'hint' or 'pip'");
+				System.out.println(currentPlayerName + ": Commands: roll, dice <n1><n2>, double, cube, pip, info, new, quit, stop, hint");
 				newInput = in.nextLine().trim().toUpperCase();
 
 				if (!view.isValid(newInput)) {
-					System.out.println("Invalid Input, Please Type: 'roll' or 'quit' or 'hint' or 'pip'");
+					System.out.println("Invalid Input, Please Type: roll, dice <n1><n2>, double, cube, pip, info, new, quit, stop, hint");
 					newInput = in.nextLine().trim().toUpperCase();
 				}
 
