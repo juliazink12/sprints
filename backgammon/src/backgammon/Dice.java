@@ -9,29 +9,32 @@ public class Dice {
 	private int dice2;
 	private int useDice1;
 	private int useDice2;
+	private int doublingCube;
+	private int doublingCubePlayer;
+	public boolean doubledAtLeastOnce;
 	
 	public Dice(){
 		rand = new Random();
 	}
 	
 	
-	public int rollToStart() {
+	public int rollToStart(String name1, String name2) {
 		Scanner in = new Scanner(System.in);
-		System.out.println("Player 1: roll to start");
+		System.out.println(name1 + ": roll to start");
 		String input = in.nextLine().trim().toUpperCase();
 		if(!input.equals("ROLL")){
 			System.out.println("Incorrect");
-			return rollToStart();
+			return rollToStart(name1, name2);
 		}
 		int[] result1 =rollDices();
 		int player1Roll =result1[0]+result1[1];
 		System.out.println(result1[0]+","+result1[1]);
 
-		System.out.println("Player 2: roll to start");
+		System.out.println(name2 + ": roll to start");
 		String input2 = in.nextLine().trim().toUpperCase();
 		if(!input2.equals("ROLL")){
 			System.out.println("Incorrect");
-			return rollToStart();
+			return rollToStart(name1, name2);
 		}
 		int[] result2 =rollDices();
 		int player2Roll =result2[0]+result2[1];
@@ -39,7 +42,7 @@ public class Dice {
 		
 		if(player1Roll==player2Roll) {
 			System.out.println("Tie! Please roll again");
-			return rollToStart();
+			return rollToStart(name1, name2);
 		}else if(player1Roll>player2Roll) {
 			return 1;
 		}else{
@@ -85,6 +88,43 @@ public class Dice {
 	
 	public int getDiceTwo(){
 		return dice2;
+	}
+	
+	public void doubleGame() {
+		doublingCube = doublingCube*2;
+		doublingCubePlayer = (doublingCubePlayer == 1 ? 2 : 1);
+		doubledAtLeastOnce = true;
+	}
+	
+	
+	public int getDoublingCubePlayer() {
+		return doublingCubePlayer;
+	}
+	
+	public void setDoublingCubePlayer(int n) {
+		doublingCubePlayer = n;
+	}
+	
+	public int getDoublingCube() {
+		return doublingCube;
+	}
+	
+	public void setDoublingCube(int n) {
+		doublingCube = n;
+	}
+	
+	
+	public void displayCube(String name1, String name2) {
+		String doublingCubePlayerName = (doublingCubePlayer == 1 ? name1 : name2); 
+		System.out.println("\nValue: " + doublingCube + "\nPlayer: " + doublingCubePlayerName + "\n");
+	}
+	
+	public boolean getDoubledAtLeastOnce() {
+		return doubledAtLeastOnce;
+	}
+	
+	public void setDoubledAtLeastOnce() {
+		doubledAtLeastOnce = true;
 	}
 	
 	/*

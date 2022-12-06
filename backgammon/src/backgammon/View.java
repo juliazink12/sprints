@@ -7,6 +7,8 @@ public class View {
 	private String name;
 	public String playerOne;
 	public String playerTwo;
+	public int player1Score;
+	public int player2Score;
 	//Player players;
 	
 	View(){
@@ -30,6 +32,28 @@ public class View {
 	public boolean isValid (String in) {
 		String input = in.trim().toUpperCase();
 		return input.equals("PIP")|| input.equals("HINT")|| input.equals("ROLL")|| input.equals("QUIT");
+	}
+	
+	public int getScore(int n) {
+		if (n==1) {
+			return player1Score;
+		}
+		else {
+			return player2Score;
+		}
+	}
+	
+	public void setScore(int playerNumber, int newScore) {
+		if (playerNumber==1) {
+			player1Score += newScore;
+		}
+		else {
+			player2Score += newScore;
+		}
+	}
+	
+	public void displayScores(String name1, String name2) {
+		System.out.println("Scores: " + name1 + " - " + player1Score + ", " + name2 + " - " + player2Score + "\n\n\n");
 	}
 
 	
