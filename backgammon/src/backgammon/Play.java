@@ -1,3 +1,13 @@
+/**
+* Play class for the backgammon game
+* contains the main method
+* 
+* @author juliazink
+* coded with saya
+* 
+*/
+
+
 package backgammon;
 
 import java.util.*;
