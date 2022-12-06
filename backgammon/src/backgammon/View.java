@@ -15,6 +15,8 @@ public class View {
 	 in = new Scanner(System.in);
 	 playerOne = "";
 	 playerTwo = "";
+	 player1Score = 0;
+	 player2Score = 0;
 	}
 	
 	
@@ -31,11 +33,20 @@ public class View {
 	
 	public boolean isValid (String in) {
 		String input = in.trim().toUpperCase();
-		if(!(input.equals("PIP")|| input.equals("HINT")|| input.equals("ROLL"))) return false;
-		if(!(input.equals("QUIT")||input.equals("STOP")||input.equals("CUBE"))||input.equals("NEW")) return false;
-		if(!(input.equals("INFO")||input.equals("DOUBLE")||input.equals("ACCEPT")||input.equals("REFUSE"))) return false;
-		if(!(input.startsWith("DICE"))) return false;
-		return true;
+		boolean valid = false;
+		if(input.equals("PIP")|| input.equals("HINT")|| input.equals("ROLL")) {
+			valid = true;
+		}
+		if(input.equals("QUIT")||input.equals("STOP")||input.equals("CUBE")||input.equals("NEW")) {
+			valid = true;
+		}
+		if(input.equals("INFO")||input.equals("DOUBLE")||input.equals("ACCEPT")||input.equals("REFUSE")) {
+			valid = true;
+		}
+		if(input.startsWith("DICE")) {
+			valid = true;
+		}
+		return valid;
 	}
 	
 	public int getScore(int n) {
