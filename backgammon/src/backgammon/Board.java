@@ -324,9 +324,5 @@ public class Board {
 		System.out.println("Pipcounts. White: " + pip1 + ", Red: " + pip2);
 
 	}
-	
-	public void displayStats(int doublingCube, int matchLength) {
-		System.out.println("\nMatch score:\n" + doublingCube + "\nMatch length: " + (matchLength/2) + "\n");
-	}
 
 }

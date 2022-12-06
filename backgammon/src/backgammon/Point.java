@@ -19,8 +19,6 @@ public class Point {
 		quarter = q; 
 	}
 	
-	
-	
 	public int getNumber() {
 		return number;
 	}
@@ -39,7 +37,6 @@ public class Point {
 		}
 		else {
 			return null;
-			//CHANGEEEEE
 		}
 	}
 	
@@ -50,8 +47,7 @@ public class Point {
 	}
 	
 	public String pointToString(int n) {
-		String res = checkerList.get(n).getDisplayString();
-		return res;
+		return checkerList.get(n).getDisplayString();
 	}
 	
 	public boolean isEmpty() {

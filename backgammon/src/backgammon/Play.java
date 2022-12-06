@@ -7,53 +7,47 @@ import java.util.*;
 public class Play {
 
 	public static void main(String[] args) {
-		
+
 		boolean stopMain = false;
-		
+
 		Dice dice = new Dice();
 		View view = new View();
 		Board board = new Board();
-		
+
 		view.welcomePlayers();
-		
+
 		Scanner in = new Scanner(System.in);
 		String newInput;
 
 		view.askNames();
 		String name1 = view.playerOne;
 		String name2 = view.playerTwo;
-		
-		
-		
-		
-		
-		
-		
+
 		while (!stopMain) {
 
 			System.out.println("New game!\n");
-	
+
 			ArrayList<Point> point = new ArrayList<Point>();
 			ArrayList<Checker> barRed = new ArrayList<Checker>();
 			ArrayList<Checker> barWhite = new ArrayList<Checker>();
 			ArrayList<Checker> offRed = new ArrayList<Checker>();
 			ArrayList<Checker> offWhite = new ArrayList<Checker>();
-	
+
 			point = board.points;
 			barRed = board.barRed;
 			barRed = board.barWhite;
 			offRed = board.offRed;
 			offWhite = board.offWhite;
 			board.setUp();
-	
+
 			boolean quit = false;
 			int matchLength = 0;
-	
+
 			int currentPlayer = dice.rollToStart(name1, name2);
 			String currentPlayerName;
 			dice.setDoublingCube(1);
 			dice.setDoublingCubePlayer(1);
-	
+
 			while (!quit) {
 				if (currentPlayer == 1) {
 					currentPlayerName = name1.toUpperCase();
@@ -62,14 +56,20 @@ public class Play {
 				}
 				System.out.println(currentPlayerName + ": Type 'roll' or 'quit' or 'hint' or 'pip'");
 				newInput = in.nextLine().trim().toUpperCase();
-				if (newInput.equals("QUIT")||newInput.equals("NEW")) {
+
+				if (!view.isValid(newInput)) {
+					System.out.println("Invalid Input, Please Type: 'roll' or 'quit' or 'hint' or 'pip'");
+					newInput = in.nextLine().trim().toUpperCase();
+				}
+
+				if (newInput.equals("QUIT") || newInput.equals("NEW")) {
 					quit = true;
 				}
-	
+
 				if (newInput.equals("PIP")) {
 					board.displayPipCount();
 				}
-	
+
 				if (newInput.equals("HINT")) {
 					StringBuilder hintText = new StringBuilder();
 					hintText.append("Type 'roll' to roll the dice and then type a letter to pick a move\n");
@@ -83,13 +83,13 @@ public class Play {
 					hintText.append("Type 'hint' for help\n");
 					System.out.println(hintText);
 				}
-				
+
 				if (newInput.equals("INFO")) {
-					board.displayStats(dice.getDoublingCube(), matchLength);
+					view.displayStats(dice.getDoublingCube(), matchLength);
 				}
-				
+
 				if (newInput.equals("DOUBLE")) {
-					if ((!dice.getDoubledAtLeastOnce())||(dice.getDoublingCubePlayer() == currentPlayer)) {
+					if ((!dice.getDoubledAtLeastOnce()) || (dice.getDoublingCubePlayer() == currentPlayer)) {
 						System.out.print("Type ACCEPT to double the stakes, type REFUSE to stop the game\n");
 						boolean inputOkay = false;
 						while (!inputOkay) {
@@ -98,27 +98,24 @@ public class Play {
 								dice.doubleGame();
 								currentPlayer = (currentPlayer == 1 ? 2 : 1);
 								inputOkay = true;
-							}
-							else if (answerInput.equals("REFUSE")) {
+							} else if (answerInput.equals("REFUSE")) {
 								view.setScore(currentPlayer, dice.getDoublingCube());
 								quit = true;
 								inputOkay = true;
-							}
-							else {
+							} else {
 								System.out.println("Incorrect input");
 							}
 						}
-					}
-					else {
+					} else {
 						System.out.println("The other player has the doubling cube, you cannot double");
 					}
-					
+
 				}
-				
+
 				if (newInput.equals("CUBE")) {
 					dice.displayCube(name1, name2);
 				}
-					
+
 				if (newInput.equals("ROLL") || newInput.startsWith("DICE")) {
 					int[] result = { 0, 0 };
 					if (newInput.equals("ROLL")) {
@@ -136,27 +133,28 @@ public class Play {
 					ArrayList<String> choices1 = new ArrayList<>();
 					ArrayList<Point> start1 = new ArrayList<>();
 					ArrayList<Point> end1 = new ArrayList<>();
-	
+
 					boolean usingDice1 = false;
 					boolean usingDice2 = false;
-	
+
 					boolean update1 = false;
 					boolean update2 = false;
-	
+
 					board.printBoard();
-	
+
 					while (!usingDice1 && !usingDice2) {
 						// Dice1
-						System.out.println(currentPlayerName + "to play " + result[0] + "-" + result[1] + " Select from:");
+						System.out.println(
+								currentPlayerName + "to play " + result[0] + "-" + result[1] + " Select from:");
 						choices1.add(choice1 + " ");
-	
+
 						for (int i = 0; i < dice1Paths.size(); i++) {
 							start1.add(dice1Paths.get(i).start);
 							end1.add(dice1Paths.get(i).end);
-	
-							System.out.println(choice1 + " " + (start1.get(i) != null ? start1.get(i).number : "BAR") + "->"
-									+ (end1.get(i) != null ? end1.get(i).number : "OFF"));
-	
+
+							System.out.println(choice1 + " " + (start1.get(i) != null ? start1.get(i).number : "BAR")
+									+ "->" + (end1.get(i) != null ? end1.get(i).number : "OFF"));
+
 							choice1++;
 							choices1.add(choice1 + " ");
 						}
@@ -188,25 +186,26 @@ public class Play {
 							System.out.print("Incorrect input");
 						}
 						board.printBoard();
-	
+
 						// Dice2
 						ArrayList<Path> dice2Paths = board.getPathByColor(currentPlayer == 1, result[1]);
 						char choice2 = 'A';
 						ArrayList<String> choices2 = new ArrayList<>();
 						ArrayList<Point> start2 = new ArrayList<>();
 						ArrayList<Point> end2 = new ArrayList<>();
-	
+
 						if (usingDice1 && update1) {
 							System.out.println(currentPlayerName + "to play " + result[1] + " Select from:");
 							choices2.add(choice2 + " ");
-	
+
 							for (int j = 0; j < dice2Paths.size(); j++) {
 								start2.add(dice2Paths.get(j).start);
 								end2.add(dice2Paths.get(j).end);
-	
-								System.out.println(choice2 + " " + (start2.get(j) != null ? start2.get(j).number : "BAR")
-										+ "->" + (end2.get(j) != null ? end2.get(j).number : "OFF"));
-	
+
+								System.out
+										.println(choice2 + " " + (start2.get(j) != null ? start2.get(j).number : "BAR")
+												+ "->" + (end2.get(j) != null ? end2.get(j).number : "OFF"));
+
 								choice2++;
 								choices2.add(choice2 + " ");
 							}
@@ -237,45 +236,45 @@ public class Play {
 							} else {
 								System.out.print("Incorrect input");
 							}
-	
+
 							board.printBoard();
 						}
-	
+
 					}
 					matchLength += 1;
 					currentPlayer = (currentPlayer == 1 ? 2 : 1);
 				}
-	
+
 				if (quit) {
 					System.out.println("Game ended");
 					view.displayScores(name1, name2);
 				}
-				/*else if (board.checkWin(currentPlayer == 1)) {
-					System.out.println("Game Over!");
-				}*/
-				
+				/*
+				 * else if (board.checkWin(currentPlayer == 1)) {
+				 * System.out.println("Game Over!"); }
+				 */
+
 				else if (board.checkWin() == 1) {
 					view.setScore(1, dice.getDoublingCube());
 					System.out.println(name1 + " wins!");
 					view.displayScores(name1, name2);
-				}
-				else if (board.checkWin() == 2) {
+				} else if (board.checkWin() == 2) {
 					view.setScore(2, dice.getDoublingCube());
 					System.out.println(name2 + " wins!");
 					view.displayScores(name1, name2);
 				}
-				
+
 				if (newInput.equals("STOP")) {
 					stopMain = true;
 				}
-	
+
 			}
-			
+
 		}
-		
+
 		System.out.println("End of session, here are the final scores:");
 		view.displayScores(name1, name2);
-		
+
 	}
 
 }

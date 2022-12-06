@@ -31,7 +31,11 @@ public class View {
 	
 	public boolean isValid (String in) {
 		String input = in.trim().toUpperCase();
-		return input.equals("PIP")|| input.equals("HINT")|| input.equals("ROLL")|| input.equals("QUIT");
+		if(!(input.equals("PIP")|| input.equals("HINT")|| input.equals("ROLL"))) return false;
+		if(!(input.equals("QUIT")||input.equals("STOP")||input.equals("CUBE"))||input.equals("NEW")) return false;
+		if(!(input.equals("INFO")||input.equals("DOUBLE")||input.equals("ACCEPT")||input.equals("REFUSE"))) return false;
+		if(!(input.startsWith("DICE"))) return false;
+		return true;
 	}
 	
 	public int getScore(int n) {
@@ -54,6 +58,10 @@ public class View {
 	
 	public void displayScores(String name1, String name2) {
 		System.out.println("Scores: " + name1 + " - " + player1Score + ", " + name2 + " - " + player2Score + "\n\n\n");
+	}
+	
+	public void displayStats(int doublingCube, int matchLength) {
+		System.out.println("\nMatch score:\n" + doublingCube + "\nMatch length: " + (matchLength/2) + "\n");
 	}
 
 	

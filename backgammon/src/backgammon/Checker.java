@@ -30,7 +30,6 @@ public class Checker {
 		}
 		else {
 			return ("R");
-			//\u001B[31mO\u001B[0m
 		}
 	}
 
